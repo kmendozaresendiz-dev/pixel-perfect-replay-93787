@@ -37,7 +37,7 @@ function Toggle({ id, label, desc, checked, onChange }: { id: string; label: str
 
 function Config() {
   const [s, setS] = usePersisted<Settings>("settings", DEFAULTS);
-  const set = (k: string, v: boolean | string) => setS({ ...s, [k]: v });
+  const set = (k: keyof Settings, v: boolean | string) => setS({ ...s, [k]: v } as Settings);
   const sect = "card-soft divide-y p-5";
 
   return (
