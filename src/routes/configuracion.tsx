@@ -16,12 +16,12 @@ export const Route = createFileRoute("/configuracion")({
   component: Config,
 });
 
-type Settings = Record<string, boolean | string>;
-const DEFAULTS: Settings = {
-  size: "Normal", startDay: "Lunes", animations: true, emoji: true,
-  dailyReminder: true, reminderTime: "20:00", goalAlerts: true, weeklySummary: false,
+const DEFAULTS = {
+  size: "Normal" as string, startDay: "Lunes" as string, animations: true, emoji: true,
+  dailyReminder: true, reminderTime: "20:00" as string, goalAlerts: true, weeklySummary: false,
   lockDiary: false, privateProfile: true, analytics: false,
 };
+type Settings = typeof DEFAULTS;
 
 function Toggle({ id, label, desc, checked, onChange }: { id: string; label: string; desc: string; checked: boolean; onChange: (v: boolean) => void }) {
   return (
