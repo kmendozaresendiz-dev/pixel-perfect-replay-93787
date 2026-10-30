@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActividadesRouteImport } from './routes/actividades'
+import { Route as ConfiguracionRouteImport } from './routes/configuracion'
+import { Route as DiarioRouteImport } from './routes/diario'
+import { Route as ObjetivosRouteImport } from './routes/objetivos'
+import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as ProgresoRouteImport } from './routes/progreso'
+import { Route as RegistroRouteImport } from './routes/registro'
+import { Route as TiempoRouteImport } from './routes/tiempo'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ActividadesRoute = ActividadesRouteImport.update({
+  id: '/actividades',
+  path: '/actividades',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfiguracionRoute = ConfiguracionRouteImport.update({
+  id: '/configuracion',
+  path: '/configuracion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiarioRoute = DiarioRouteImport.update({
+  id: '/diario',
+  path: '/diario',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ObjetivosRoute = ObjetivosRouteImport.update({
+  id: '/objetivos',
+  path: '/objetivos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgresoRoute = ProgresoRouteImport.update({
+  id: '/progreso',
+  path: '/progreso',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistroRoute = RegistroRouteImport.update({
+  id: '/registro',
+  path: '/registro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TiempoRoute = TiempoRouteImport.update({
+  id: '/tiempo',
+  path: '/tiempo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/actividades': typeof ActividadesRoute
+  '/configuracion': typeof ConfiguracionRoute
+  '/diario': typeof DiarioRoute
+  '/objetivos': typeof ObjetivosRoute
+  '/perfil': typeof PerfilRoute
+  '/progreso': typeof ProgresoRoute
+  '/registro': typeof RegistroRoute
+  '/tiempo': typeof TiempoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/actividades': typeof ActividadesRoute
+  '/configuracion': typeof ConfiguracionRoute
+  '/diario': typeof DiarioRoute
+  '/objetivos': typeof ObjetivosRoute
+  '/perfil': typeof PerfilRoute
+  '/progreso': typeof ProgresoRoute
+  '/registro': typeof RegistroRoute
+  '/tiempo': typeof TiempoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/actividades': typeof ActividadesRoute
+  '/configuracion': typeof ConfiguracionRoute
+  '/diario': typeof DiarioRoute
+  '/objetivos': typeof ObjetivosRoute
+  '/perfil': typeof PerfilRoute
+  '/progreso': typeof ProgresoRoute
+  '/registro': typeof RegistroRoute
+  '/tiempo': typeof TiempoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/actividades'
+    | '/configuracion'
+    | '/diario'
+    | '/objetivos'
+    | '/perfil'
+    | '/progreso'
+    | '/registro'
+    | '/tiempo'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/actividades'
+    | '/configuracion'
+    | '/diario'
+    | '/objetivos'
+    | '/perfil'
+    | '/progreso'
+    | '/registro'
+    | '/tiempo'
+  id:
+    | '__root__'
+    | '/'
+    | '/actividades'
+    | '/configuracion'
+    | '/diario'
+    | '/objetivos'
+    | '/perfil'
+    | '/progreso'
+    | '/registro'
+    | '/tiempo'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActividadesRoute: typeof ActividadesRoute
+  ConfiguracionRoute: typeof ConfiguracionRoute
+  DiarioRoute: typeof DiarioRoute
+  ObjetivosRoute: typeof ObjetivosRoute
+  PerfilRoute: typeof PerfilRoute
+  ProgresoRoute: typeof ProgresoRoute
+  RegistroRoute: typeof RegistroRoute
+  TiempoRoute: typeof TiempoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/actividades': {
+      id: '/actividades'
+      path: '/actividades'
+      fullPath: '/actividades'
+      preLoaderRoute: typeof ActividadesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configuracion': {
+      id: '/configuracion'
+      path: '/configuracion'
+      fullPath: '/configuracion'
+      preLoaderRoute: typeof ConfiguracionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diario': {
+      id: '/diario'
+      path: '/diario'
+      fullPath: '/diario'
+      preLoaderRoute: typeof DiarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/objetivos': {
+      id: '/objetivos'
+      path: '/objetivos'
+      fullPath: '/objetivos'
+      preLoaderRoute: typeof ObjetivosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/progreso': {
+      id: '/progreso'
+      path: '/progreso'
+      fullPath: '/progreso'
+      preLoaderRoute: typeof ProgresoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registro': {
+      id: '/registro'
+      path: '/registro'
+      fullPath: '/registro'
+      preLoaderRoute: typeof RegistroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tiempo': {
+      id: '/tiempo'
+      path: '/tiempo'
+      fullPath: '/tiempo'
+      preLoaderRoute: typeof TiempoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActividadesRoute: ActividadesRoute,
+  ConfiguracionRoute: ConfiguracionRoute,
+  DiarioRoute: DiarioRoute,
+  ObjetivosRoute: ObjetivosRoute,
+  PerfilRoute: PerfilRoute,
+  ProgresoRoute: ProgresoRoute,
+  RegistroRoute: RegistroRoute,
+  TiempoRoute: TiempoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
