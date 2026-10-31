@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Heart } from "lucide-react";
@@ -45,10 +46,10 @@ function Tiempo() {
 
   const Card = ({ i }: { i: (typeof IDEAS)[number] }) => (
     <article className={`card-soft relative p-5 ${toneOf(i.cat)}`}>
-      <button onClick={() => toggle(i.id)} aria-pressed={favs.includes(i.id)} aria-label={favs.includes(i.id) ? `Quitar ${i.title} de favoritos` : `Agregar ${i.title} a favoritos`}
+      <Button variant="ghost" onClick={() => toggle(i.id)} aria-pressed={favs.includes(i.id)} aria-label={favs.includes(i.id) ? `Quitar ${i.title} de favoritos` : `Agregar ${i.title} a favoritos`}
         className="absolute right-3 top-3 rounded-full bg-card p-2 shadow-soft">
         <Heart className={`h-4 w-4 ${favs.includes(i.id) ? "fill-rose-deep text-rose-deep" : ""}`} />
-      </button>
+      </Button>
       <span className="text-4xl" aria-hidden>{i.emoji}</span>
       <h3 className="mt-3 text-lg">{i.title}</h3>
       <p className="text-muted-foreground">{i.desc}</p>
@@ -64,8 +65,8 @@ function Tiempo() {
       <PageHeader title="Tiempo para mí" subtitle="Ideas bonitas para dedicarte un ratito." deco="🌷" />
       <div className="mb-5 flex flex-wrap gap-2" role="group" aria-label="Categorías">
         {CATS.map((c) => (
-          <button key={c.name} onClick={() => setCat(c.name)} aria-pressed={cat === c.name}
-            className={`rounded-full px-4 py-1.5 text-sm font-bold shadow-soft ${c.tone} ${cat === c.name ? "ring-2 ring-primary" : ""}`}>{c.name}</button>
+          <Button variant="ghost" key={c.name} onClick={() => setCat(c.name)} aria-pressed={cat === c.name}
+            className={`rounded-full px-4 py-1.5 text-sm font-bold shadow-soft ${c.tone} ${cat === c.name ? "ring-2 ring-primary" : ""}`}>{c.name}</Button>
         ))}
       </div>
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{list.map((i) => <Card key={i.id} i={i} />)}</div>

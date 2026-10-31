@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHeader } from "@/components/AppShell";
@@ -36,17 +37,17 @@ function Progreso() {
       <PageHeader title="Mi progreso" subtitle="Cada pequeño paso suma. ¡Mira todo lo que has logrado!" deco="📈" />
       <div className="mb-6 inline-flex rounded-full bg-card p-1 shadow-soft" role="group" aria-label="Periodo">
         {(["semana", "mes"] as const).map((r) => (
-          <button key={r} onClick={() => setRange(r)} aria-pressed={range === r}
-            className={`rounded-full px-5 py-1.5 font-bold capitalize ${range === r ? "bg-primary text-primary-foreground" : ""}`}>{r === "semana" ? "Semanal" : "Mensual"}</button>
+          <Button variant="ghost" key={r} onClick={() => setRange(r)} aria-pressed={range === r}
+            className={`rounded-full px-5 py-1.5 font-bold capitalize ${range === r ? "bg-primary text-primary-foreground" : ""}`}>{r === "semana" ? "Semanal" : "Mensual"}</Button>
         ))}
       </div>
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {[
           { l: "Tareas completadas", v: d.stats.tareas, t: "bg-mint" },
-          { l: "Entradas de diario", v: d.stats.diario, t: "bg-peach" },
+          { l: "Entradas de diario", v: d.stats.diario, t: "bg-card" },
           { l: "Registros de ánimo", v: d.stats.registros, t: "bg-rose" },
-          { l: "Minutos para mí", v: d.stats.minutos, t: "bg-cream" },
+          { l: "Minutos para mí", v: d.stats.minutos, t: "bg-card" },
         ].map((s) => (
           <div key={s.l} className={`card-soft p-4 ${s.t}`}>
             <p className="text-sm font-bold text-muted-foreground">{s.l}</p>
@@ -56,7 +57,7 @@ function Progreso() {
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
-        <section className="card-soft p-5">
+        <section className="border-t p-5">
           <h2 className="mb-4 text-xl">Actividades completadas</h2>
           <div className="flex h-48 items-end gap-2 sm:gap-3" role="img" aria-label={`Actividades por ${range}: ${d.tasks.join(", ")}`}>
             {d.tasks.map((v, i) => (
@@ -69,7 +70,7 @@ function Progreso() {
           </div>
         </section>
 
-        <section className="card-soft p-5">
+        <section className="border-t p-5">
           <h2 className="mb-4 text-xl">Estado de ánimo</h2>
           <svg viewBox="0 0 320 120" className="h-48 w-full" role="img" aria-label="Tendencia de ánimo">
             <polyline points={pts} fill="none" className="stroke-rose-deep" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
@@ -80,11 +81,12 @@ function Progreso() {
           <div className="flex justify-between px-1 text-xs font-bold text-muted-foreground">{d.labels.map((l) => <span key={l}>{l}</span>)}</div>
         </section>
 
-        <section className="card-soft p-5 lg:col-span-2">
+        <section className="border-t p-5 lg:col-span-2">
           <h2 className="mb-4 text-xl">Emociones del {range}</h2>
           <ul className="space-y-3">
             {MOOD_DIST.map((m) => {
-              const mood = MOODS.find((x) => x.id === m.id)!;
+              const mood = MOODS.find((x) => x.id === m.id);
+              if (!mood) return null;
               return (
                 <li key={m.id} className="flex items-center gap-3">
                   <span className="w-28 shrink-0 font-semibold">{mood.emoji} {mood.label}</span>

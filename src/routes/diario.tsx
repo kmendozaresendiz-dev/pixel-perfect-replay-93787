@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Pencil, Search, Trash2 } from "lucide-react";
@@ -18,7 +19,7 @@ export const Route = createFileRoute("/diario")({
   component: Diario,
 });
 
-const TONES = ["bg-peach", "bg-baby", "bg-mint", "bg-cream", "bg-lavender", "bg-rose"];
+const TONES = ["bg-peach/40", "bg-card"];
 
 function Diario() {
   const [entries, setEntries] = usePersisted<Entry[]>("entries", demoEntries);
@@ -39,14 +40,14 @@ function Diario() {
   return (
     <div>
       <PageHeader title="Mi diario" subtitle="Escribe lo que sientes, lo que viviste y lo que sueñas." deco="🎀" />
-      <form onSubmit={submit} className="card-soft space-y-3 bg-peach p-5 sm:p-6">
+      <form onSubmit={submit} className="space-y-3 border-l-4 border-peach bg-peach/20 p-5 sm:p-6">
         <label htmlFor="t" className="sr-only">Título</label>
         <input id="t" value={title} onChange={(e) => setTitle(e.target.value)} className="input-soft !bg-card font-display text-lg" placeholder="Título de tu entrada" />
         <label htmlFor="b" className="sr-only">Contenido</label>
-        <textarea id="b" rows={5} value={body} onChange={(e) => setBody(e.target.value)} className="input-soft !bg-card" placeholder="Querido diario..." />
+        <textarea id="b" rows={5} value={body} onChange={(e) => setBody(e.target.value)} className="input-soft notebook !bg-card" placeholder="Querido diario..." />
         <div className="flex flex-wrap gap-2">
-          <button className="btn-primary">{editing ? "Guardar cambios" : "Guardar entrada"} ✍️</button>
-          {editing && <button type="button" className="btn-soft" onClick={() => { setEditing(null); setTitle(""); setBody(""); }}>Cancelar</button>}
+          <Button variant="ghost" className="btn-primary">{editing ? "Guardar cambios" : "Guardar entrada"} ✍️</Button>
+          {editing && <Button variant="ghost" type="button" className="btn-soft" onClick={() => { setEditing(null); setTitle(""); setBody(""); }}>Cancelar</Button>}
         </div>
       </form>
 
@@ -65,12 +66,12 @@ function Diario() {
             <h3 className="mt-1 text-lg">{e.title}</h3>
             <p className="mt-2 flex-1 text-muted-foreground">{e.body}</p>
             <div className="mt-4 flex gap-2">
-              <button className="btn-soft !bg-card !px-3 !py-1.5 text-sm" onClick={() => { setEditing(e.id); setTitle(e.title); setBody(e.body); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
+              <Button variant="ghost" className="btn-soft !bg-card !px-3 !py-1.5 text-sm" onClick={() => { setEditing(e.id); setTitle(e.title); setBody(e.body); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
                 <Pencil className="h-3.5 w-3.5" /> Editar
-              </button>
-              <button className="btn-soft !bg-card !px-3 !py-1.5 text-sm" onClick={() => setEntries(entries.filter((x) => x.id !== e.id))}>
+              </Button>
+              <Button variant="ghost" className="btn-soft !bg-card !px-3 !py-1.5 text-sm" onClick={() => setEntries(entries.filter((x) => x.id !== e.id))}>
                 <Trash2 className="h-3.5 w-3.5" /> Eliminar
-              </button>
+              </Button>
             </div>
           </article>
         ))}

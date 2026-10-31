@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Check, Plus, Trash2 } from "lucide-react";
@@ -40,16 +41,16 @@ function Actividades() {
 
   const Row = ({ t }: { t: Task }) => (
     <li className="flex items-center gap-3 rounded-2xl bg-muted p-3">
-      <button onClick={() => toggle(t.id)} aria-label={t.done ? `Marcar pendiente ${t.title}` : `Completar ${t.title}`}
+      <Button variant="ghost" onClick={() => toggle(t.id)} aria-label={t.done ? `Marcar pendiente ${t.title}` : `Completar ${t.title}`}
         className={`grid h-6 w-6 shrink-0 place-items-center rounded-full border-2 ${t.done ? "border-mint-deep bg-mint-deep text-primary-foreground" : "border-ring"}`}>
         {t.done && <Check className="h-3.5 w-3.5" />}
-      </button>
+      </Button>
       <div className="min-w-0 flex-1">
         <p className={`font-semibold ${t.done ? "line-through opacity-60" : ""}`}>{t.title}</p>
         <p className="text-xs text-muted-foreground">{fmtDate(t.date)}</p>
       </div>
       <span className={`hidden rounded-full px-2 py-0.5 text-xs font-bold sm:inline ${CAT_TONE[t.category]}`}>{t.category}</span>
-      <button aria-label={`Eliminar ${t.title}`} onClick={() => setTasks(tasks.filter((x) => x.id !== t.id))} className="rounded-full p-2 hover:bg-card"><Trash2 className="h-4 w-4" /></button>
+      <Button variant="ghost" aria-label={`Eliminar ${t.title}`} onClick={() => setTasks(tasks.filter((x) => x.id !== t.id))} className="rounded-full p-2 hover:bg-card"><Trash2 className="h-4 w-4" /></Button>
     </li>
   );
 
@@ -71,13 +72,13 @@ function Actividades() {
             {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
           </select>
         </div>
-        <button className="btn-primary"><Plus className="h-4 w-4" /> Agregar</button>
+        <Button variant="ghost" className="btn-primary"><Plus className="h-4 w-4" /> Agregar</Button>
       </form>
 
       <div className="my-6 flex flex-wrap gap-2" role="group" aria-label="Filtrar por categoría">
         {["Todas", ...CATEGORIES].map((c) => (
-          <button key={c} onClick={() => setFilter(c)} aria-pressed={filter === c}
-            className={`rounded-full px-4 py-1.5 text-sm font-bold ${filter === c ? "bg-primary text-primary-foreground" : "bg-card shadow-soft"}`}>{c}</button>
+          <Button variant="ghost" key={c} onClick={() => setFilter(c)} aria-pressed={filter === c}
+            className={`rounded-full px-4 py-1.5 text-sm font-bold ${filter === c ? "bg-primary text-primary-foreground" : "bg-card shadow-soft"}`}>{c}</Button>
         ))}
       </div>
 

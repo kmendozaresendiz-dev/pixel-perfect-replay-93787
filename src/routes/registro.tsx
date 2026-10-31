@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Trash2 } from "lucide-react";
@@ -38,11 +39,11 @@ function Registro() {
           <legend className="mb-3 font-display text-lg font-semibold">Elige tu emoción</legend>
           <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
             {MOODS.map((m) => (
-              <button type="button" key={m.id} onClick={() => setMood(m.id)} aria-pressed={mood === m.id}
+              <Button variant="ghost" type="button" key={m.id} onClick={() => setMood(m.id)} aria-pressed={mood === m.id}
                 className={`flex flex-col items-center gap-1 rounded-2xl border-2 p-3 font-bold transition ${m.tone} ${mood === m.id ? "border-primary shadow-pop" : "border-transparent"}`}>
                 <span className="text-3xl" aria-hidden>{m.emoji}</span>
                 <span className="text-sm">{m.label}</span>
-              </button>
+              </Button>
             ))}
           </div>
         </fieldset>
@@ -50,13 +51,13 @@ function Registro() {
           <label htmlFor="note" className="mb-2 block font-bold">Notas personales</label>
           <textarea id="note" rows={3} value={note} onChange={(e) => setNote(e.target.value)} className="input-soft" placeholder="¿Qué pasó hoy? ¿Qué te hizo sentir así?" />
         </div>
-        <button type="submit" disabled={!mood} className="btn-primary disabled:opacity-50">Guardar registro ✨</button>
+        <Button variant="ghost" type="submit" disabled={!mood} className="btn-primary disabled:opacity-50">Guardar registro ✨</Button>
       </form>
 
       <h2 className="mb-3 mt-8 text-xl">Historial</h2>
       <ul className="grid gap-3 sm:grid-cols-2">
         {entries.map((e) => {
-          const m = MOODS.find((x) => x.id === e.mood)!;
+          const m = MOODS.find((x) => x.id === e.mood);
           return (
             <li key={e.id} className={`card-soft flex items-start gap-3 p-4 ${m?.tone}`}>
               <span className="text-3xl" aria-hidden>{m?.emoji}</span>
@@ -64,9 +65,9 @@ function Registro() {
                 <p className="font-bold">{m?.label} <span className="font-semibold text-muted-foreground">· {fmtDate(e.date)}</span></p>
                 {e.note && <p className="text-muted-foreground">{e.note}</p>}
               </div>
-              <button aria-label="Eliminar registro" onClick={() => setEntries(entries.filter((x) => x.id !== e.id))} className="rounded-full p-2 hover:bg-card">
+              <Button variant="ghost" aria-label="Eliminar registro" onClick={() => setEntries(entries.filter((x) => x.id !== e.id))} className="rounded-full p-2 hover:bg-card">
                 <Trash2 className="h-4 w-4" />
-              </button>
+              </Button>
             </li>
           );
         })}
