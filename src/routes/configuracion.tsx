@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/AppShell";
 import { usePersisted } from "@/lib/store";
@@ -27,10 +28,10 @@ function Toggle({ id, label, desc, checked, onChange }: { id: string; label: str
   return (
     <div className="flex items-center justify-between gap-4 py-3">
       <div><label htmlFor={id} className="font-bold">{label}</label><p className="text-sm text-muted-foreground">{desc}</p></div>
-      <button id={id} role="switch" aria-checked={checked} onClick={() => onChange(!checked)}
-        className={`relative h-7 w-12 shrink-0 rounded-full transition-colors ${checked ? "bg-primary" : "bg-border"}`}>
+      <Button variant="ghost" id={id} role="switch" aria-checked={checked} onClick={() => onChange(!checked)}
+        className={`relative !h-7 !w-12 !p-0 shrink-0 rounded-full transition-colors ${checked ? "bg-primary" : "bg-border"}`}>
         <span className={`absolute top-1 h-5 w-5 rounded-full bg-card shadow-soft transition-all ${checked ? "left-6" : "left-1"}`} />
-      </button>
+      </Button>
     </div>
   );
 }
@@ -38,7 +39,7 @@ function Toggle({ id, label, desc, checked, onChange }: { id: string; label: str
 function Config() {
   const [s, setS] = usePersisted<Settings>("settings", DEFAULTS);
   const set = (k: keyof Settings, v: boolean | string) => setS({ ...s, [k]: v } as Settings);
-  const sect = "card-soft divide-y p-5";
+  const sect = "divide-y border-t pt-5";
 
   return (
     <div>
@@ -79,8 +80,8 @@ function Config() {
           <Toggle id="pp" label="Perfil privado" desc="Solo tú puedes ver tu información." checked={!!s.privateProfile} onChange={(v) => set("privateProfile", v)} />
           <Toggle id="an" label="Compartir datos de uso" desc="Ayúdanos a mejorar de forma anónima." checked={!!s.analytics} onChange={(v) => set("analytics", v)} />
           <div className="flex flex-wrap gap-2 pt-4">
-            <button className="btn-soft" onClick={() => setS(DEFAULTS)}>Restablecer preferencias</button>
-            <button className="btn-soft !bg-destructive/10 !text-destructive" onClick={() => { Object.keys(localStorage).filter((k) => k.startsWith("mb:")).forEach((k) => localStorage.removeItem(k)); location.reload(); }}>Borrar mis datos</button>
+            <Button variant="ghost" className="btn-soft" onClick={() => setS(DEFAULTS)}>Restablecer preferencias</Button>
+            <Button variant="ghost" className="btn-soft !bg-destructive/10 !text-destructive" onClick={() => { Object.keys(localStorage).filter((k) => k.startsWith("mb:")).forEach((k) => localStorage.removeItem(k)); location.reload(); }}>Borrar mis datos</Button>
           </div>
         </section>
       </div>

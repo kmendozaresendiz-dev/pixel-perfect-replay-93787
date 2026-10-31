@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Check, Plus, Trash2, CalendarHeart } from "lucide-react";
@@ -18,7 +19,7 @@ export const Route = createFileRoute("/objetivos")({
   component: Objetivos,
 });
 
-const TONES = ["bg-baby", "bg-rose", "bg-cream", "bg-mint", "bg-lavender", "bg-peach"];
+const TONES = ["bg-baby/40", "bg-card"];
 
 function Objetivos() {
   const [goals, setGoals] = usePersisted<Goal[]>("goals", demoGoals);
@@ -46,7 +47,7 @@ function Objetivos() {
           <label htmlFor="gd" className="mb-1 block text-sm font-bold">Fecha límite</label>
           <input id="gd" type="date" value={deadline} onChange={(e) => setDeadline(e.target.value)} className="input-soft !bg-card" />
         </div>
-        <button className="btn-primary"><Plus className="h-4 w-4" /> Crear meta</button>
+        <Button variant="ghost" className="btn-primary"><Plus className="h-4 w-4" /> Crear meta</Button>
       </form>
 
       <div className="grid gap-5 md:grid-cols-2">
@@ -60,7 +61,7 @@ function Objetivos() {
                   <h2 className="text-xl">{g.title}</h2>
                   <p className="flex items-center gap-1 text-sm text-muted-foreground"><CalendarHeart className="h-4 w-4" /> Hasta el {fmtDate(g.deadline)}</p>
                 </div>
-                <button aria-label={`Eliminar meta ${g.title}`} onClick={() => setGoals(goals.filter((x) => x.id !== g.id))} className="rounded-full p-2 hover:bg-card"><Trash2 className="h-4 w-4" /></button>
+                <Button variant="ghost" aria-label={`Eliminar meta ${g.title}`} onClick={() => setGoals(goals.filter((x) => x.id !== g.id))} className="rounded-full p-2 hover:bg-card"><Trash2 className="h-4 w-4" /></Button>
               </div>
               <div className="mt-4">
                 <div className="mb-1 flex justify-between text-sm font-bold"><span>Progreso</span><span>{pct}%</span></div>
@@ -89,7 +90,7 @@ function Objetivos() {
               }}>
                 <label htmlFor={`sub-${g.id}`} className="sr-only">Nueva subtarea</label>
                 <input id={`sub-${g.id}`} value={drafts[g.id] ?? ""} onChange={(e) => setDrafts({ ...drafts, [g.id]: e.target.value })} className="input-soft !bg-card !py-2" placeholder="Agregar subtarea" />
-                <button className="btn-soft !bg-card" aria-label="Agregar subtarea"><Plus className="h-4 w-4" /></button>
+                <Button variant="ghost" className="btn-soft !bg-card" aria-label="Agregar subtarea"><Plus className="h-4 w-4" /></Button>
               </form>
             </article>
           );

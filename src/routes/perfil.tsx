@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHeader } from "@/components/AppShell";
@@ -21,8 +22,8 @@ const AVATARS = ["🐰", "🐱", "🐻", "🦊", "🐼", "🦄", "🐥", "🌸"]
 type Profile = { name: string; email: string; birthday: string; bio: string; avatar: string };
 
 function Perfil() {
-  const [profile, setProfile] = usePersisted<Profile>("profile", {
-    name: "Keyri Mendoza", email: "keyri@mindfulbox.app", birthday: "2003-05-14", bio: "Amo la papelería bonita, el té y los atardeceres. 🌅", avatar: "🐰",
+  const [profile, setProfile] = usePersisted<Profile>("profile-demo", {
+    name: "Usuario de demostración", email: "demo@example.com", birthday: "", bio: "Amo la papelería bonita, el té y los atardeceres. 🌅", avatar: "🐰",
   });
   const [form, setForm] = useState<Profile | null>(null);
   const f = form ?? profile;
@@ -40,7 +41,7 @@ function Perfil() {
           <p className="mt-3">{f.bio}</p>
           <div className="mt-5 grid w-full grid-cols-3 gap-2 text-sm">
             {[["42", "Registros"], ["17", "Entradas"], ["3", "Metas"]].map(([v, l]) => (
-              <div key={l} className="rounded-2xl bg-card p-2"><p className="font-display text-xl font-semibold">{v}</p><p className="text-muted-foreground">{l}</p></div>
+              <div key={l} className="border-t p-2"><p className="font-display text-xl font-semibold">{v}</p><p className="text-muted-foreground">{l}</p></div>
             ))}
           </div>
         </section>
@@ -50,8 +51,8 @@ function Perfil() {
             <legend className="mb-2 font-bold">Elige tu avatar</legend>
             <div className="flex flex-wrap gap-2">
               {AVATARS.map((a) => (
-                <button type="button" key={a} onClick={() => set("avatar", a)} aria-label={`Avatar ${a}`} aria-pressed={f.avatar === a}
-                  className={`grid h-12 w-12 place-items-center rounded-2xl bg-lavender text-2xl ${f.avatar === a ? "ring-2 ring-primary" : ""}`}>{a}</button>
+                <Button variant="ghost" type="button" key={a} onClick={() => set("avatar", a)} aria-label={`Avatar ${a}`} aria-pressed={f.avatar === a}
+                  className={`grid h-12 w-12 place-items-center rounded-2xl bg-lavender text-2xl ${f.avatar === a ? "ring-2 ring-primary" : ""}`}>{a}</Button>
               ))}
             </div>
           </fieldset>
@@ -62,7 +63,7 @@ function Perfil() {
           </div>
           <div><label htmlFor="pbio" className="mb-1 block text-sm font-bold">Sobre mí</label><textarea id="pbio" rows={3} className="input-soft" value={f.bio} onChange={(e) => set("bio", e.target.value)} /></div>
           <div className="flex items-center gap-3">
-            <button className="btn-primary">Guardar perfil</button>
+            <Button variant="ghost" className="btn-primary">Guardar perfil</Button>
             {saved && <span role="status" className="font-bold text-mint-deep">¡Guardado! 💗</span>}
           </div>
         </form>
